@@ -1,0 +1,8 @@
+Deployment:
+> prefect deploy ~/mlops-zoomcamp/03-orchestration/orchestrate.py:main_flow -n hw3qn_flow -p hw3pool
+> prefect deploy ~/mlops-zoomcamp/03-orchestration/orchestrate_artifact.py:main_flow_artifact -n hw3_artifact_flow -p hw3pool
+> prefect deploy ~/mlops-zoomcamp/03-orchestration/orchestrate_email.py:main_flow_email -n hw3_email_flow -p hw3pool
+
+Email server credentials block:
+> pip install prefect-email
+> prefect block register -m prefect_email
