@@ -156,4 +156,4 @@ def main_flow_email(
 
 
 if __name__ == "__main__":
-    main_flow()
+    main_flow_email()
