@@ -3,7 +3,8 @@ Notes on command line
 # Install packages with pipenv (for pipenv, I created a base conda environment for python=3.10)
 pipenv install scikit-learn==1.2.2 pandas  pyarrow --python=3.10
 
-# Docker commands (note the absolute path of the output parquet file in starter.py)
+# Docker commands (note the absolute path of the output parquet file in starter.py; 
+# it was changed from subfolder because the file-mount option of Docker required output folder in an absolute path)
 $ docker build -t hw4-docker-script .
 $ docker run -it --rm -v ~/mlops-zoomcamp/04-deployment/output:/output hw4-docker-script 2022 4
 
