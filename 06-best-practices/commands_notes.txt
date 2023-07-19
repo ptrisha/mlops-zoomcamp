@@ -1,0 +1,48 @@
+
+> conda activate python3.10-env
+> docker-compose up localstack
+> pipenv install
+
+
+Question 4
+==========
+> aws s3 mb s3://nyc-duration --endpoint-url http://localhost:4566
+make_bucket: nyc-duration
+
+>aws s3 ls --endpoint-url=http://localhost:4566
+2023-07-19 19:14:43 nyc-duration
+
+> export INPUT_FILE_PATTERN="s3://nyc-duration/in/{year:04d}-{month:02d}.parquet"
+> export OUTPUT_FILE_PATTERN="s3://nyc-duration/out/{year:04d}-{month:02d}.parquet"
+> export S3_ENDPOINT_URL="http://localhost:4566"
+
+To check:
+> echo $S3_ENDPOINT_URL
+> echo $OUTPUT_FILE_PATTERN
+> echo $INPUT_FILE_PATTERN
+
+Question 5
+==========
+> pipenv run python integration_test.py
+
+> aws s3 ls s3://nyc-duration/in --recursive  --endpoint-url=http://localhost:4566
+
+2023-07-20 00:16:37       3667 in/2022-01.parquet
+
+
+Question 6
+==========
+> pipenv run python batch.py 2022 1
+
+predicted mean duration: 10.502483457575869
+Results df:
+     ride_id  predicted_duration
+0  2022/01_0           24.781802
+1  2022/01_1            0.617543
+2  2022/01_2            6.108105
+
+> aws s3 ls s3://nyc-duration/out --recursive  --endpoint-url=http://localhost:4566
+
+2023-07-20 00:41:30       1995 out/2022-01.parquet
+
+
